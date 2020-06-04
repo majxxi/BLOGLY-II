@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block title %}
+<h1>USER PROFILE</h1>
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.get_full_name() }}</h1>
+<img src= "{{ user.image_url }}" width="300px" >
+<button><a href="/users/{{ user.id }}/edit">EDIT</a></button>
+
+<form action="/users/{{ user.id }}/delete" method="POST">
+  <button>DELETE</button>
+</form>
+
+<section>
+  <h2>Posts</h2>
+  <ul>
+    {% for post in user.posts %}
+      <li><a href="/posts/{{ post.post_id }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<button><a href="/users/{{ user.id }}/posts/new">Add Post</a></button>
+
+
+<button><a href="/">Go back</a></button>
+{% endblock %}
